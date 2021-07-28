@@ -37,27 +37,6 @@ jobs:
           repo: eth-cscs/sarus
           tags: true
 
-    - name: "Test install from source CentOS 7"
-      if: branch IN (master, fix-travis)
-      script:
-      - . ./CI/utility_docker_functions.bash Release gcc.cmake $(pwd) $(pwd)/cache centos:7 centos:7
-      - sarus-build-images
-      - travis_wait 60 sarus-build-from-scratch-and-test
-
-    - name: "Test install from source Ubuntu 20.04"
-      if: branch IN (master, fix-travis)
-      script:
-      - . ./CI/utility_docker_functions.bash Release gcc.cmake $(pwd) $(pwd)/cache ubuntu:20.04 ubuntu:20.04
-      - sarus-build-images
-      - sarus-build-from-scratch-and-test
-
-    - name: "Test Spack (OpenSUSE)"
-      if: branch IN (master, fix-travis)
-      script:
-      - . ./CI/utility_docker_functions.bash Release gcc.cmake $(pwd) $(pwd)/cache spack-opensuseleap15.2 spack-opensuseleap15.2
-      - sarus-build-images
-      - travis_wait 120 sarus-spack-test
-
 notifications:
   email:
     recipients:
